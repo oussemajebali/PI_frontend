@@ -51,7 +51,6 @@ import { SelectComponent } from './elements/select/select.component';
         RadioComponent,
         CheckboxComponent,
         SwitchComponent,
-        LayoutComponent,
         DatepickerComponent,
         TimepickerComponent,
         TagsInputComponent,
