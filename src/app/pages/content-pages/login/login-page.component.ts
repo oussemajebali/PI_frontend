@@ -54,7 +54,8 @@ export class LoginPageComponent {
       response => {
         this.spinner.hide();
         // Assuming response contains the token
-        localStorage.setItem('token', response.token);
+        localStorage.setItem('access_token', response.access_token);
+        localStorage.setItem('refresh_token', response.refresh_token);
         this.spinner.hide();
        this.router.navigate(['/dashboard/dashboard1']);
        console.log('login successful', response);
