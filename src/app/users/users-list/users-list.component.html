@@ -72,43 +72,41 @@
               </label>
             </fieldset>
             <ngx-datatable class="bootstrap core-bootstrap" [columnMode]="ColumnMode.force" [headerHeight]="50"
-              [footerHeight]="50" rowHeight="auto" [limit]="limitRef" [rows]="rows" [scrollbarH]="true"
-              [columns]="columns">
-              <ngx-datatable-column name="ID" prop="ID" [width]="50"></ngx-datatable-column>
-              <ngx-datatable-column name="Username" prop="Username" [width]="150">
-                <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
-                  <div class="d-flex align-items-center">
-                    <img class="rounded-circle mr-1" src="assets/img/portrait/small/{{
-                        row.avatar
-                      }}" height="32" width="32" alt="datatable-avatar" />
-
-                    <div class="cell-line-height">
-                      <a class="line-height-1 mb-0" routerLink="/pages/users-view">{{ name }}</a>
-                    </div>
+            [footerHeight]="50" rowHeight="auto" [limit]="limitRef" [rows]="rows" [scrollbarH]="true" [columns]="columns">
+            <ngx-datatable-column name="ID" prop="userId" [width]="50"></ngx-datatable-column>
+            <ngx-datatable-column name="Email" prop="email" [width]="150">
+              <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
+                <div class="d-flex align-items-center">
+                  <img class="rounded-circle mr-1" [src]="'http://localhost:8080/' + row.avatar" height="32" width="32" alt="datatable-avatar" />
+                  <div class="cell-line-height">
+                    <a class="line-height-1 mb-0">{{ name }}</a>
                   </div>
-                </ng-template>
-              </ngx-datatable-column>
-              <ngx-datatable-column name="Name" prop="Name" [width]="150"></ngx-datatable-column>
-              <ngx-datatable-column name="Last Activity" prop="Last Activity" [width]="120"></ngx-datatable-column>
-              <ngx-datatable-column name="Verified" prop="Verified" [width]="70"></ngx-datatable-column>
-              <ngx-datatable-column name="Role" prop="Role" [width]="70"></ngx-datatable-column>
-              <ngx-datatable-column name="Status" prop="Status" [width]="70">
-                <ng-template let-status="value" ngx-datatable-cell-template>
-                  <div class="badge" [ngClass]="{
-                      'bg-light-success': status == 'Active',
-                      'bg-light-danger': status == 'Banned',
-                      'bg-light-warning': status == 'Close'
-                    }">
-                    {{ status }}
-                  </div>
-                </ng-template>
-              </ngx-datatable-column>
-              <ngx-datatable-column name="Actions" [width]="50">
-                <ng-template ngx-datatable-cell-template>
-                  <a routerLink="/pages/users-edit"><i class="ft-edit text-primary cursor-pointer"></i></a>
-                </ng-template>
-              </ngx-datatable-column>
-            </ngx-datatable>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Name" prop="name" [width]="150"></ngx-datatable-column>
+            <ngx-datatable-column name="Age" prop="age" [width]="120"></ngx-datatable-column>
+            <ngx-datatable-column name="Enabled" prop="enabled" [width]="70"></ngx-datatable-column>
+            <ngx-datatable-column name="Role" prop="role" [width]="70"></ngx-datatable-column>
+            <ngx-datatable-column name="Status" prop="accountNonExpired" [width]="70">
+              <ng-template let-status="value" ngx-datatable-cell-template>
+                <div class="badge" [ngClass]="{
+                  'bg-light-success': status == 'true',
+                  'bg-light-danger': status == 'false',
+                  'bg-light-warning': status == 'Close'
+                }">
+                  {{ status }}
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Actions" [width]="50">
+              <ng-template ngx-datatable-cell-template>
+                <a routerLink="/users/edit"><i class="ft-edit text-primary cursor-pointer"></i></a>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+          
+          
             <!-- ngx-datatable-filter -->
           </div>
         </div>

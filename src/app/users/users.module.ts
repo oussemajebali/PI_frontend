@@ -11,6 +11,9 @@ import { UsersListComponent } from "./users-list/users-list.component";
 import { UsersEditComponent } from "./users-edit/users-edit.component";
 import { SwiperModule } from "ngx-swiper-wrapper";
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './user.service';
 @NgModule({
     imports: [
         CommonModule,
@@ -20,11 +23,17 @@ import { NgxDatatableModule } from "@swimlane/ngx-datatable";
         MatchHeightModule,
         SwiperModule,
         NgxDatatableModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule
     ],
     declarations: [
         UsersListComponent,
         UsersViewComponent,
         UsersEditComponent
+    ],
+    providers: [
+        UserService,
     ]
 })
 export class UsersModule { }

@@ -94,27 +94,27 @@ const routes: Routes = [
         path: 'kb',
         loadChildren: () => import('./knowledge-base/knowledge-base.module').then(m => m.KnowledgeBaseModule)
       },
-      {
-        path: 'users-list',
-        component: UsersListComponent,
-        data: {
-          title: 'List'
-        }
-      },
-      {
-        path: 'users-view',
-        component: UsersViewComponent,
-        data: {
-          title: 'View'
-        }
-      },
-      {
-        path: 'users-edit',
-        component: UsersEditComponent,
-        data: {
-          title: 'Edit'
-        }
-      }
+      // {
+      //   path: 'users-list',
+      //   component: UsersListComponent,
+      //   data: {
+      //     title: 'List'
+      //   }
+      // },
+      // {
+      //   path: 'users-view',
+      //   component: UsersViewComponent,
+      //   data: {
+      //     title: 'View'
+      //   }
+      // },
+      // {
+      //   path: 'users-edit',
+      //   component: UsersEditComponent,
+      //   data: {
+      //     title: 'Edit'
+      //   }
+      // }
     ]
   }
 ];
