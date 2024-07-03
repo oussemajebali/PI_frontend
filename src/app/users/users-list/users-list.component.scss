@@ -1,0 +1,10 @@
+ngx-datatable {
+    display: block;
+    height: 100%;
+  }
+  
+  ngx-datatable .datatable-body {
+    max-height: 400px; /* Set this to the desired height */
+    overflow-y: auto;
+  }
+  
