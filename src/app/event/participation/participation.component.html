@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-12">
+      <div class="content-header">Participate in Event</div>
+      <p class="content-sub-header mb-1">Are you interested in this event? Click the button below to participate!</p>
+    </div>
+  </div>
+  <div class="col-lg-12 col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Event Participation</h4>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <button (click)="participate()" class="btn btn-primary mr-2" [disabled]="isParticipating">
+            <i class="ft-check-square mr-1"></i>Participate
+          </button>
+          <button type="button" class="btn btn-secondary">
+            <i class="ft-x mr-1"></i>Cancel
+          </button>
+  
+          <div *ngIf="participationFailed" class="alert alert-danger mt-2" role="alert">
+            Error participating in event. Please try again.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

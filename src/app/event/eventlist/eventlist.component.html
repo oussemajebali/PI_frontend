@@ -2,11 +2,8 @@
 
   <div class="row">
     <div class="col-12">
-      <div class="content-header">Fabs (Floating Action Buttons) in cards</div>
-      <p class="content-sub-header mb-1">Cards require a small amount of markup and classes to provide you with as much
-        control as possible. These classes and markup are flexible though and can typically be remixed and extended with
-        ease. For example, if your card has no flush content like images, feel free to put the
-        <code>.card-content</code> class on the <code>.card</code> element to consolidate your markup.</p>
+      <div class="content-header">Events List</div>
+      <p class="content-sub-header mb-1">Care to join an event? You can find here all the events displayed for you ! Take a look and don't forget to participate !</p>
     </div>
   </div>
   <div class="row">
@@ -25,8 +22,9 @@
                 <img src="assets/img/photos/12.jpg" class="d-block w-100" alt="Third slide">
               </ng-template>
             </ngb-carousel>
-            <a class="btn btn-floating halfway-fab btn-large bg-warning"><i class="ft-plus"></i></a>
-          </div>
+            <button class="btn btn-floating halfway-fab btn-large bg-warning" (click)="participate(event)">
+              <i class="ft-plus"></i> Participate
+            </button>          </div>
           <div class="card-body">
             <h4 class="card-title">{{ event.title }}</h4>
             <p class="card-text">{{ event.description }}</p>

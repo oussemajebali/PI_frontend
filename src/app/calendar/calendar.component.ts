@@ -149,7 +149,6 @@ export class CalendarsComponent {
       title: 'New event',
       start: startOfDay(new Date()),
       end: endOfDay(new Date()),
-      color: colors.red,
       draggable: true,
       resizable: {
         beforeStart: true,
