@@ -19,7 +19,9 @@ export class UserService {
   }
 
   getUserById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${id}`);
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.baseUrl}/${id}`,{ headers });
   }
 
   createUser(user: any): Observable<any> {
@@ -40,12 +42,19 @@ export class UserService {
     return this.http.post<any>(`${this.baseUrl}/adduser`, formData, { headers });
   }
 
-  updateUser(id: number, updatedUser: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/update/${id}`, updatedUser);
+  updateUser(userId: number, user: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token') // Make sure you have the correct token here
+    });
+
+    return this.http.put(`${this.baseUrl}/update/${userId}`, user, { headers });
   }
 
   deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`, { headers });
   }
 
   changePassword(request: any): Observable<void> {

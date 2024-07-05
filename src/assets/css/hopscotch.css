@@ -247,13 +247,13 @@ div.hopscotch-bubble .hopscotch-nav-button {
   height: 26px;
   line-height: 24px;
   font-size: 12px;
-  *zoom: 1;
+  zoom: 1;
   white-space: nowrap;
   display: -moz-inline-stack;
   display: inline-block;
-  *vertical-align: auto;
+  vertical-align: auto;
   zoom: 1;
-  *display: inline;
+  display: inline;
   vertical-align: middle;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;

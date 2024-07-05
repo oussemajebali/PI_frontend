@@ -8,6 +8,7 @@ import { CustomizerService } from '../services/customizer.service';
 import { UntypedFormControl } from '@angular/forms';
 import { LISTITEMS } from '../data/template-search';
 import { Router } from '@angular/router';
+import { UserService } from '../../users/user.service'; // Import the UserService
 
 @Component({
   selector: "app-navbar",
@@ -45,11 +46,19 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public config: any = {};
 
-  constructor(public translate: TranslateService,
+  userName: string = '';
+  userEmail: string = '';
+  userRole: string = '';
+  userAvatar: string = 'assets/img/portrait/small/avatar-s-1.png'; // default avatar
+
+  constructor(
+    public translate: TranslateService,
     private layoutService: LayoutService,
     private router: Router,
-    private configService: ConfigService, private cdr: ChangeDetectorRef) {
-
+    private configService: ConfigService,
+    private cdr: ChangeDetectorRef,
+    private userService: UserService // Inject the UserService
+  ) {
     const browserLang: string = translate.getBrowserLang();
     translate.use(browserLang.match(/en|es|pt|de/) ? browserLang : "en");
     this.config = this.configService.templateConf;
@@ -60,6 +69,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.hideSidebar = !isShow;
       });
 
+    this.getUserDetails();
   }
 
   ngOnInit() {
@@ -74,15 +84,13 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-
     this.configSub = this.configService.templateConf$.subscribe((templateConf) => {
       if (templateConf) {
         this.config = templateConf;
       }
       this.loadLayout();
       this.cdr.markForCheck();
-
-    })
+    });
   }
 
   ngOnDestroy() {
@@ -106,7 +114,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadLayout() {
-
     if (this.config.layout.menuPosition && this.config.layout.menuPosition.toString().trim() != "") {
       this.menuPosition = this.config.layout.menuPosition;
     }
@@ -124,7 +131,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     else {
       this.transparentBGClass = "";
     }
-
   }
 
   onSearchKey(event: any) {
@@ -169,7 +175,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.seachTextEmpty.emit(true);
   }
 
-
   ChangeLanguage(language: string) {
     this.translate.use(language);
 
@@ -211,12 +216,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.searchOpenClass = '';
     }
     this.seachTextEmpty.emit(true);
-
-
-
   }
-
-
 
   toggleNotificationSidebar() {
     this.layoutService.toggleNotificationSidebar(true);
@@ -224,5 +224,18 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   toggleSidebar() {
     this.layoutService.toggleSidebarSmallScreen(this.hideSidebar);
+  }
+
+  getUserDetails() {
+    const userId = localStorage.getItem('user_id');
+    if (userId) {
+      this.userService.getUserById(+userId).subscribe(user => {
+        console.log(user);
+        this.userName = `${user.name} ${user.lastName}`;
+        this.userEmail = user.email;
+        this.userRole = user.role;
+        this.userAvatar = user.avatar || 'assets/img/portrait/small/avatar-s-1.png';
+      });
+    }
   }
 }

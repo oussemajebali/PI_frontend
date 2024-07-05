@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, TemplateRef } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'app/shared/auth/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login-page',
@@ -10,8 +11,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
+  @ViewChild('notAdminModal') notAdminModal!: TemplateRef<any>;
+
   loginFormSubmitted = false;
   isLoginFailed = false;
+  role: string = '';
 
   loginForm = new UntypedFormGroup({
     email: new UntypedFormControl('student@esprit.tn', [Validators.required, Validators.email]),
@@ -23,11 +27,16 @@ export class LoginPageComponent {
     private router: Router,
     private authService: AuthService,
     private spinner: NgxSpinnerService,
+    private modalService: NgbModal,
     private route: ActivatedRoute
   ) { }
 
   get lf() {
     return this.loginForm.controls;
+  }
+
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
   }
 
   // On submit button click
@@ -56,9 +65,16 @@ export class LoginPageComponent {
         // Assuming response contains the token
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('refresh_token', response.refresh_token);
-        this.spinner.hide();
-       this.router.navigate(['/dashboard/dashboard1']);
-       console.log('login successful', response);
+        localStorage.setItem('role', response.role);
+        localStorage.setItem('user_id', response.user_id);
+
+        if (response.role !== 'UNIVERSITY_ADMIN' && response.role !== 'CLUB_LEADER') {
+          this.role = response.role;
+          this.open(this.notAdminModal);
+          console.log("dkhal");
+        } else {
+          this.router.navigate(['/dashboard/dashboard1']);
+        }
       },
       error => {
         this.spinner.hide();
