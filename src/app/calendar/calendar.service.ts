@@ -6,7 +6,7 @@ import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class EventService {
+export class CalendarService {
 private baseUrl = environment.BASE_URL + '/event';
 
   constructor(private http: HttpClient) {}
@@ -33,10 +33,5 @@ private baseUrl = environment.BASE_URL + '/event';
 
   deleteEvent(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
-  }
-  createParticipation(eventId: number): Observable<any> {
-    const token = localStorage.getItem('access_token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.baseUrl}/${eventId}/participate`, {}, { headers });
   }
 }

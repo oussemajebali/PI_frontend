@@ -55,7 +55,13 @@ export class CreateEventComponent implements OnInit {
       return;
     }
 
-    this.spinner.show();
+    this.spinner.show(undefined, {
+		type: 'ball-triangle-path',
+		size: 'medium',
+		bdColor: 'rgba(0, 0, 0, 0.8',
+		color: '#fff',
+		fullScreen: true
+	  });
 
     const newEvent = {
       title: this.ef.title.value,

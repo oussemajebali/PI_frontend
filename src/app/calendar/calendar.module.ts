@@ -9,6 +9,7 @@ import { CalendarRoutingModule } from "./calendar-routing.module";
 
 import { CalendarsComponent } from "./calendar.component";
 import { DateTimePickerComponent } from './date-time-picker.component';
+import { CalendarService } from './calendar.service';
 
 @NgModule({
     imports: [
@@ -26,6 +27,10 @@ import { DateTimePickerComponent } from './date-time-picker.component';
     declarations: [
         CalendarsComponent,
         DateTimePickerComponent
+    ],
+    providers : [
+        CalendarService,
     ]
+
 })
 export class CalendarsModule { }

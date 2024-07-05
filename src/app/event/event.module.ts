@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EventListComponent } from "./eventlist/eventlist.component";
 import { CreateEventComponent } from "./createevent/createevent.component";
+import { ParticipationComponent } from "./participation/participation.component"; 
 import { EventService} from "./event.service";
 
 @NgModule({
@@ -25,7 +26,8 @@ import { EventService} from "./event.service";
     ],
     declarations: [
         CreateEventComponent,
-        EventListComponent
+        EventListComponent,
+        ParticipationComponent
     ],
     providers : [
         EventService,
