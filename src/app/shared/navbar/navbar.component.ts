@@ -230,7 +230,8 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     const userId = localStorage.getItem('user_id');
     if (userId) {
       this.userService.getUserById(+userId).subscribe(user => {
-        console.log(user);
+        console.log("user connected",user);
+        localStorage.setItem('user_email', user.email);
         this.userName = `${user.name} ${user.lastName}`;
         this.userEmail = user.email;
         this.userRole = user.role;

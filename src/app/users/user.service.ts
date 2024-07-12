@@ -41,7 +41,9 @@ export class UserService {
 
     return this.http.post<any>(`${this.baseUrl}/adduser`, formData, { headers });
   }
-
+  getCurrentUserName(): string | null {
+    return localStorage.getItem('user_email');
+  }
   updateUser(userId: number, user: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

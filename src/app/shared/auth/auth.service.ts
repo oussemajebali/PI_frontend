@@ -23,7 +23,7 @@ export class AuthService {
         localStorage.setItem('token', response.token);
         localStorage.setItem('role', response.role);
         localStorage.setItem('user_id', response.user_id);
-        console.log(response);
+        console.log("user connceted",response);
       })
     );
   }
