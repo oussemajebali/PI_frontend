@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { CreateEventComponent } from "./createevent/createevent.component";
 import { EventListComponent } from "./eventlist/eventlist.component";
 

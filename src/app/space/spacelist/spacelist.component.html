@@ -1,0 +1,15 @@
+<!-- space-list.component.html -->
+<div style="padding: 10px;">
+  <h1>All Spaces</h1>
+  <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    <div *ngFor="let space of spaces" style="position: relative; border: 1px solid #ccc; padding: 10px; width: 300px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+      <img [src]="space.photoUrl" alt="{{ space.name }}" style="width: 100%; height: 200px; object-fit: cover;" />
+      <div style="padding: 10px;">
+        <h2 style="font-size: 1.5em; margin: 0;">{{ space.name }}</h2>
+        <p style="margin: 5px 0;">Type: {{ space.type }}</p>
+        <p style="margin: 5px 0;">{{ space.available ? 'Disponible' : 'Non disponible' }}</p>
+      </div>
+      <button (click)="reserveSpace(space)" style="position: absolute; bottom: 10px; right: 10px; background-color: red; color: white; border: none; border-radius: 50%; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer;">+</button>
+    </div>
+  </div>
+</div>
