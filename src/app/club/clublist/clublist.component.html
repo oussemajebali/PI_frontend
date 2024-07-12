@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-12">
+    <div class="content-header">Clubs List</div>
+    <p class="content-sub-header mb-1">
+      Explore our clubs and find the right one for you! Check out the details and join us!
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div *ngFor="let club of clubs" class="col-lg-4 col-md-12 col-12">
+    <div class="card overflow-hidden">
+      <div class="card-content">
+        <div class="card-img">
+          <!-- Replace `event.images` with an appropriate attribute if images are part of the Club entity -->
+          <ngb-carousel *ngIf="club.images && club.images.length > 0">
+            <ng-template ngbSlide *ngFor="let image of club.images">
+              <img [src]="image" class="d-block w-50" alt="Club image">
+            </ng-template>
+          </ngb-carousel>
+          <button (click)="participate(club)" class="btn btn-floating halfway-fab btn-large bg-warning">
+            <i class="ft-plus"></i> Join Club
+          </button>
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">{{ club.name }}</h4>
+          <p class="card-text">{{ club.description }}</p>
+          <p class="card-text">Club Leader: {{ club.clubLeader.name }}</p> <!-- Assuming clubLeader has a name attribute -->
+          <p class="card-text">Members Count: {{ club.clubMembers.length }}</p> <!-- Assuming clubMembers is an array -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
