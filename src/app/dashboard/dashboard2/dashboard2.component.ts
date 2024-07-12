@@ -210,6 +210,77 @@ export class Dashboard2Component {
       fullWidth: true
     },
   };
+  EventGrowthRate: Chart = {
+    type: 'Line', data: data['EventGrowthRate'],
+    options: {
+      axisX: {
+        showGrid: false,
+        showLabel: false,
+        offset: 0,
+      },
+      axisY: {
+        showGrid: false,
+        low: 50,
+        showLabel: false,
+        offset: 0,
+      },
+      fullWidth: true
+    },
+  };
+  EventParticipationRate: Chart = {
+    type: 'Line', data: data['EventParticipationRate'],
+    options: {
+      axisX: {
+        showGrid: false,
+        showLabel: false,
+        offset: 0,
+      },
+      axisY: {
+        showGrid: false,
+        low: 50,
+        showLabel: false,
+        offset: 0,
+      },
+      fullWidth: true
+    },
+  };
+  calculateGrowthRate(): number[] {
+    const series = data["EventGrowthRate"].series[0];
+    const growthRates: number[] = [];
+
+    for (let i = 1; i < series.length; i++) {
+      const current = series[i];
+      const previous = series[i - 1];
+      const growthRate = ((current - previous) / previous) * 100;
+      growthRates.push(growthRate);
+    }
+
+    return growthRates;
+  }
+
+  get latestGrowthRate(): number {
+    const rates = this.calculateGrowthRate();
+    return rates[rates.length - 1]; // Return the latest growth rate
+  }
+  TotalUsers = 100; // Define the total number of users
+
+  calculateParticipationRate(): number[] {
+    const series = data["EventParticipationRate"].series[0];
+    const participationRates: number[] = [];
+
+    for (let i = 0; i < series.length; i++) {
+      const totalParticipations = series[i];
+      const participationRate = (totalParticipations / this.TotalUsers) * 100;
+      participationRates.push(participationRate);
+    }
+
+    return participationRates;
+  }
+
+  get latestParticipationRate(): number {
+    const rates = this.calculateParticipationRate();
+    return rates[rates.length - 1]; // Return the latest participation rate
+  }
   // Line chart configuration Ends
 
   // Line chart configuration Starts
