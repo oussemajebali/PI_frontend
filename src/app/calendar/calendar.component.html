@@ -20,9 +20,24 @@
           <div class="form-group">
             <label>Event Title:</label>
             <input type="text" name="event-title" class="form-control" [(ngModel)]="modalData?.event.title"
-              (keyup)="refresh.next()">
+              (keyup)="refresh.next()" readonly>
           </div>
-          <div class="row">
+          <div class="form-group">
+            <label>Event description:</label>
+            <input type="text" name="event-title" class="form-control" [(ngModel)]="modalData?.event.description"
+              (keyup)="refresh.next()" readonly>
+          </div>
+          <div class="form-group">
+            <label>Event location:</label>
+            <input type="text" name="event-location" class="form-control" [(ngModel)]="modalData?.event.location"
+              (keyup)="refresh.next()"readonly>
+          </div>
+          <div class="form-group">
+            <label>Event maxAttendees:</label>
+            <input type="text" name="event-maxAttendees" class="form-control" [(ngModel)]="modalData?.event.maxAttendees"
+              (keyup)="refresh.next()"readonly>
+          </div>
+          <!-- <div class="row">
             <div class="col-lg-6 col-12">
               <div class="form-group">
                 <label>Primary Color:</label>
@@ -37,13 +52,13 @@
                   (change)="refresh.next()">
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="row">
             <div class="col-lg-6 col-12">
               <div class="form-group">
                 <label>Starts At:</label>
                 <mwl-demo-utils-date-time-picker name="starts-at" [(ngModel)]="modalData?.event.start"
-                  (ngModelChange)="refresh.next()" placeholder="Not set">
+                  (ngModelChange)="refresh.next()" placeholder="Not set" readonly>
                 </mwl-demo-utils-date-time-picker>
               </div>
             </div>
@@ -51,7 +66,7 @@
               <div class="form-group">
                 <label>Ends At:</label>
                 <mwl-demo-utils-date-time-picker name="ends-at" [(ngModel)]="modalData?.event.end"
-                  (ngModelChange)="refresh.next()" placeholder="Not set">
+                  (ngModelChange)="refresh.next()" placeholder="Not set"readonly>
                 </mwl-demo-utils-date-time-picker>
               </div>
             </div>
@@ -60,10 +75,11 @@
       </form>
     </div>
     <div class="modal-footer">
+      <a [routerLink]="['/events/event-list']" class="btn bg-light-primary mb-2 mb-sm-0" (click)="close()">Go to event list</a>
       <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
     </div>
   </ng-template>
-
+ 
   <div class="card">
     <div class="card-content">
       <div class="card-body">
@@ -80,7 +96,7 @@
                 Next
               </a>
             </div>
-
+ 
             <div class="btn-group d-block d-lg-none">
               <a class="btn btn-primary ft-chevron-left" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
                 <i class="icon icon-arrows-left"></i>
@@ -108,7 +124,7 @@
                 Day
               </a>
             </div>
-
+ 
             <div class="btn-group d-block d-sm-block d-md-block d-lg-none">
               <a class="btn btn-primary btn-icon-icon" (click)="view = 'month'" [class.active]="view === 'month'">
                 <i class="fa fa-th"></i>
@@ -120,17 +136,17 @@
                 <i class="fa fa-th-list"></i>
               </a>
             </div>
-
+ 
           </div>
         </div>
-        <div class="row mb-2">
+        <!-- <div class="row mb-2">
           <div class="col-12">
             <button class="btn btn-primary float-right" (click)="addEvent()">
               Add Event
             </button>
           </div>
-        </div>
-
+        </div> -->
+ 
         <div [ngSwitch]="view">
           <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
             [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
