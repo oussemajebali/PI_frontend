@@ -1,7 +1,12 @@
-export interface Club {
-    id?: number; // Make 'id' optional
-    name: string;
-    description: string;
-    // Add other fields as necessary
+export class Club {
+  id?: number;
+  name: string;
+  description: string;
+  // Add other properties as needed
+
+  constructor() {
+    this.name = '';
+    this.description = '';
+    // Initialize other properties
   }
-  
+}

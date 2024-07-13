@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ClubService } from '../club.service';
-import { AuthService } from '../../shared/auth/auth.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Club } from '../club.model'; // Ensure this path is correct
 
 @Component({
@@ -12,30 +9,15 @@ import { Club } from '../club.model'; // Ensure this path is correct
   templateUrl: './createclub.component.html',
   styleUrls: ['./createclub.component.scss']
 })
-export class CreateClubComponent implements OnInit {
+export class CreateClubComponent {
   clubForm: FormGroup;
-  isCreateFailed = false;
+  isCreateFailed: boolean = false;
 
-  constructor(
-    private router: Router,
-    private clubService: ClubService,
-    private authService: AuthService,
-    private spinner: NgxSpinnerService
-  ) {}
-
-  ngOnInit() {
-    if (!this.authService.isAuthenticated()) {
-      this.router.navigate(['/pages/login']);
-    }
-
-    this.clubForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required)
+  constructor(private http: HttpClient, private router: Router, private fb: FormBuilder) {
+    this.clubForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required]
     });
-  }
-
-  get cf() {
-    return this.clubForm.controls;
   }
 
   onSubmit() {
@@ -43,32 +25,26 @@ export class CreateClubComponent implements OnInit {
       return;
     }
 
-    this.spinner.show(undefined, {
-      type: 'ball-triangle-path',
-      size: 'medium',
-      bdColor: 'rgba(0, 0, 0, 0.8',
-      color: '#fff',
-      fullScreen: true
-    });
+    const url = 'http://localhost:8080/api/v1/clubs/addclub';
 
-    const newClub: Club = {
-      name: this.cf.name.value,
-      description: this.cf.description.value
-      // You can include other fields if needed
-    };
+    // Retrieve the token from localStorage
+    const token = localStorage.getItem('access_token'); 
+    if (!token) {
+      console.error('No token found in localStorage');
+      return;
+    }
 
-    this.clubService.createClub(newClub).subscribe(
-      response => {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    this.http.post(url, this.clubForm.value, { headers }).subscribe({
+      next: (response) => {
         console.log('Club created successfully:', response);
-        this.isCreateFailed = false;
-        alert('Club created successfully!');
-        this.clubForm.reset();
+        this.router.navigate(['/clubs']); // Navigate to the clubs list or any other page
       },
-      error => {
+      error: (error) => {
         console.error('Error creating club:', error);
         this.isCreateFailed = true;
-        alert('Error creating club. Please try again.');
       }
-    );
+    });
   }
 }
