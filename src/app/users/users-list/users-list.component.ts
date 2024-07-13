@@ -2,10 +2,6 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
 import { DatatableComponent, ColumnMode } from "@swimlane/ngx-datatable";
 import { UserService } from "../user.service";
 import { Router } from "@angular/router";
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ChangeDetectorRef } from '@angular/core';
-
-
 
 @Component({
   selector: "app-users-list",
@@ -35,16 +31,10 @@ export class UsersListComponent implements OnInit {
     { name: "Actions", prop: "actions" },
   ];
 
-  constructor(
-    private userService: UserService,
-    private router: Router,
-    private modalService: NgbModal,
-    private cdRef: ChangeDetectorRef // Inject NgbModal here
-  ) {}
+  constructor(private userService: UserService , private router: Router) {}
 
   ngOnInit(): void {
     this.loadUsers();
-    this.cdRef.detectChanges();
   }
 
   loadUsers() {
@@ -78,61 +68,24 @@ export class UsersListComponent implements OnInit {
   updateLimit(limit) {
     this.limitRef = limit.target.value;
   }
-
   editUser(user) {
-    if (user != null) {
-      this.router.navigate(['/users/edit', user.userId], { state: { user } });
-      console.log("user redirected to update", user);
-    } else {
-      console.log("user not redirected", user);
-    }
+  if (user!=null){
+    this.router.navigate(['/users/edit', user.userId], { state: { user } });
+    console.log("user redirect to update" , user );
+  }else {
+    console.log("user not redirected" , user );
   }
-
+  }
   deleteUser(id: number) {
-    const modalRef = this.modalService.open(DeleteModalContentComponent);
-    modalRef.componentInstance.userId = id;
-
-    modalRef.result.then((result) => {
-      if (result === 'Confirm delete') {
-        this.userService.deleteUser(id).subscribe(
-          () => {
-            console.log(`User number ${id} deleted successfully`);
-            this.loadUsers(); // Reload the list of users after deletion
-          },
-          (error) => {
-            console.error('Failed to delete user', error);
-          }
-        );
-      }
-    }, (reason) => {
-      console.log(`Dismissed with reason: ${reason}`);
-    });
-  }
-}
-@Component({
-  selector: 'delete-modal-content',
-  template: `
-    <div class="modal-header">
-      <h4 class="modal-title">Confirm Delete</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>Are you sure you want to delete user number: {{ userId }}?</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-danger" (click)="confirmDelete()">Delete</button>
-      <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancel</button>
-    </div>
-  `
-})
-export class DeleteModalContentComponent {
-  userId: number;
-
-  constructor(public modal: NgbActiveModal) {}
-
-  confirmDelete() {
-    this.modal.close('Confirm delete');
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.userService.deleteUser(id).subscribe(
+        () => {
+          this.loadUsers(); // Reload the list of users after deletion
+        },
+        (error) => {
+          console.error('Failed to delete user', error);
+        }
+      );
+    }
   }
 }

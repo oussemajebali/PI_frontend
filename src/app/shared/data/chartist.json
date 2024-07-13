@@ -847,6 +847,123 @@
       ]
     ]
   },
+  
+  "EventGrowthRate": {
+    "labels": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "series": [
+      [
+        50,
+        45,
+        60,
+        55,
+        70,
+        55,
+        60,
+        55,
+        65,
+        57,
+        60,
+        53,
+        53
+      ]
+    ]
+  },
+  "EventGrowthRatePie": {
+    "series": [
+      {
+        "name": "progress",
+        "className": "ct-progress",
+        "value": 12
+      },
+      {
+        "name": "progress",
+        "className": "ct-progress",
+        "value": 14
+      },
+      {
+        "name": "outstanding",
+        "className": "ct-outstanding",
+        "value": 35
+      },
+      {
+        "name": "started",
+        "className": "ct-started",
+        "value": 28
+      }
+    ]
+  },
+  "EventParticipationRatePie": {
+    "series": [
+      {
+        "name": "done",
+        "className": "ct-done",
+        "value": 90
+      },
+      {
+        "name": "progress",
+        "className": "ct-progress",
+        "value": 14
+      },
+      {
+        "name": "outstanding",
+        "className": "ct-outstanding",
+        "value": 35
+      },
+      {
+        "name": "started",
+        "className": "ct-started",
+        "value": 28
+      }
+    ]
+  },
+  "EventParticipationRate": {
+    "labels": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "series": [
+      [
+        50,
+        45,
+        60,
+        55,
+        70,
+        55,
+        60,
+        55,
+        65,
+        57,
+        60,
+        53,
+        53
+      ]
+    ]
+  },
 
   "Dashboard1_WidgetlineChart": {
     "labels": [

@@ -214,3 +214,27 @@
 :host ::ng-deep .lineAreaChart .ct-series-b .ct-point-circle {
   stroke : #F55252;
 }
+
+:host ::ng-deep .donut .ct-label {
+  font-size : 20px;
+}
+
+:host ::ng-deep .donut .ct-done .ct-slice-donut {
+  stroke : #40C057;
+  stroke-width : 24px !important;
+}
+
+:host ::ng-deep .donut .ct-progress .ct-slice-donut {
+  stroke : #F77E17;
+  stroke-width : 16px !important;
+}
+
+:host ::ng-deep .donut .ct-outstanding .ct-slice-donut {
+  stroke : #975AFF;
+  stroke-width : 8px !important;
+}
+
+:host ::ng-deep .donut .ct-started .ct-slice-donut {
+  stroke : #2F8BE6;
+  stroke-width : 32px !important;
+}

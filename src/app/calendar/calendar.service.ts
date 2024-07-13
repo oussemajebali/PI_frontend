@@ -27,15 +27,13 @@ private baseUrl = environment.BASE_URL + '/event';
     return this.http.post(this.baseUrl + '/addevent', event, { headers });
   }
  
-  updateEvent(id: number, event: any): Observable<any> {
-    const token = localStorage.getItem('access_token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.put(`${this.baseUrl}/update/${id}`, event, { headers });
+  updateEvent(id: number, event: any): Observable<Event> {
+    return this.http.put<Event>(`${this.baseUrl}/${id}`, event);
   }
  
   deleteEvent(id: number): Observable<void> {
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`, { headers });
+    return this.http.delete<void>(`${this.baseUrl}/${id}`, { headers });
   }
 }
