@@ -273,6 +273,35 @@ export class Dashboard2Component {
       }
     }
   };
+  EventGrowthRatePie: Chart = {
+    type: 'Pie',
+    data: data['EventGrowthRatePie'],
+    options: {
+      donut: true,
+      startAngle: 0,
+      labelInterpolationFnc: function (value) {
+        var total = data['EventGrowthRatePie'].series.reduce(function (prev, series) {
+          return prev + series.value;
+        }, 0);
+        return total + '%';
+      }
+    },
+    events: {
+      draw(data: any): void {
+        if (data.type === 'label') {
+          if (data.index === 0) {
+            data.element.attr({
+              dx: data.element.root().width() / 2,
+              dy: data.element.root().height() / 2
+            });
+          } else {
+            data.element.remove();
+          }
+        }
+
+      }
+    }
+  };
   calculateGrowthRate(): number[] {
     const series = data["EventGrowthRate"].series[0];
     const growthRates: number[] = [];

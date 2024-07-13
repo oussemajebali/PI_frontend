@@ -113,69 +113,19 @@
       </div>
     </div>
   </div>
-  
-  <div class="col-xl-8 col-lg-12">
+  <div class="col-xl-4 col-lg-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title mb-0">Projects</h4>
+        <h4 class="card-title mb-0">Event Growth Rate</h4>
       </div>
       <div class="card-content">
         <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-hover mb-0">
-              <thead>
-                <tr>
-                  <th>Project Name</th>
-                  <th>Team</th>
-                  <th>Progress</th>
-                  <th>Deadline</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-truncate">Project Alpha</td>
-                  <td class="text-truncate">UI Team</td>
-                  <td class="text-truncate">70%</td>
-                  <td class="text-truncate">12/12/2022</td>
-                  <td class="text-truncate"><span class="badge badge-light-success">Active</span></td>
-                  <td class="text-truncate"><button type="button" class="btn btn-outline-primary btn-sm">View</button></td>
-                </tr>
-                <tr>
-                  <td class="text-truncate">Project Beta</td>
-                  <td class="text-truncate">Backend Team</td>
-                  <td class="text-truncate">40%</td>
-                  <td class="text-truncate">12/10/2022</td>
-                  <td class="text-truncate"><span class="badge badge-light-warning">On Hold</span></td>
-                  <td class="text-truncate"><button type="button" class="btn btn-outline-primary btn-sm">View</button></td>
-                </tr>
-                <tr>
-                  <td class="text-truncate">Project Gamma</td>
-                  <td class="text-truncate">Design Team</td>
-                  <td class="text-truncate">90%</td>
-                  <td class="text-truncate">12/09/2022</td>
-                  <td class="text-truncate"><span class="badge badge-light-danger">Delayed</span></td>
-                  <td class="text-truncate"><button type="button" class="btn btn-outline-primary btn-sm">View</button></td>
-                </tr>
-                <tr>
-                  <td class="text-truncate">Project Delta</td>
-                  <td class="text-truncate">Marketing Team</td>
-                  <td class="text-truncate">30%</td>
-                  <td class="text-truncate">12/01/2022</td>
-                  <td class="text-truncate"><span class="badge badge-light-danger">Delayed</span></td>
-                  <td class="text-truncate"><button type="button" class="btn btn-outline-primary btn-sm">View</button></td>
-                </tr>
-                <tr>
-                  <td class="text-truncate">Project Epsilon</td>
-                  <td class="text-truncate">Sales Team</td>
-                  <td class="text-truncate">20%</td>
-                  <td class="text-truncate">12/02/2022</td>
-                  <td class="text-truncate"><span class="badge badge-light-success">Active</span></td>
-                  <td class="text-truncate"><button type="button" class="btn btn-outline-primary btn-sm">View</button></td>
-                </tr>
-              </tbody>
-            </table>
+          <div id="donut-dashboard-chart" class="donut">
+            <x-chartist class="height-250" [data]="EventGrowthRatePie.data"
+             [type]="EventGrowthRatePie.type" [options]="EventGrowthRatePie.options"
+             [responsiveOptions]="EventGrowthRatePie.responsiveOptions"
+             [events]="EventGrowthRatePie.events">
+            </x-chartist>
           </div>
         </div>
       </div>

@@ -882,6 +882,30 @@
       ]
     ]
   },
+  "EventGrowthRatePie": {
+    "series": [
+      {
+        "name": "progress",
+        "className": "ct-progress",
+        "value": 12
+      },
+      {
+        "name": "progress",
+        "className": "ct-progress",
+        "value": 14
+      },
+      {
+        "name": "outstanding",
+        "className": "ct-outstanding",
+        "value": 35
+      },
+      {
+        "name": "started",
+        "className": "ct-started",
+        "value": 28
+      }
+    ]
+  },
   "EventParticipationRatePie": {
     "series": [
       {
