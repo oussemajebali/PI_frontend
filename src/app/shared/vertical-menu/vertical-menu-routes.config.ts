@@ -16,6 +16,7 @@ export const ROUTES: RouteInfo[] = [
       { path: '/users/edit/:id', title: 'Edit Users', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     ]
   },
+
   {
     path: '', title: 'Events', icon: 'ft-calendar', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
       { path: '/events/EventList', title: 'Event List', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
@@ -32,6 +33,12 @@ export const ROUTES: RouteInfo[] = [
     path: '', title: 'Reservations', icon: 'icon-credit-card', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
       { path: '/reservations/ReservationList', title: 'Reservations List', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/reservations/Create', title: 'Create reservation', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    ]
+  },
+  // { path: '/statistics', title: 'Statistics', icon: 'ft-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  {
+    path: '', title: 'Statistics', icon: 'icon-credit-card', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+      { path: '/statistics', title: 'Reservations and Spaces statistics', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     ]
   },
   { path: '/inbox', title: 'Email', icon: 'ft-mail', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

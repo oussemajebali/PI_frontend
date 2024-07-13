@@ -20,6 +20,10 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => import('../../space/space.module').then(m => m.SpaceModule)
   },
   {
+    path: 'statistics',
+    loadChildren: () => import('../../statistics/statistics.module').then(m => m.StatisticsModule)
+  },
+  {
     path: 'reservations',
     loadChildren: () => import('../../reservation/reservation.module').then(m => m.ReservationModule)
   },
