@@ -23,9 +23,15 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '', title: 'Spaces', icon: 'ft-calendar', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+    path: '', title: 'Spaces', icon: 'icon-cursor-move', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
       { path: '/spaces/SpaceList', title: 'Space List', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
       { path: '/spaces/Create', title: 'Create Space', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    ]
+  },
+  {
+    path: '', title: 'Reservations', icon: 'icon-credit-card', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+      { path: '/reservations/ReservationList', title: 'Reservations List', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/reservations/Create', title: 'Create reservation', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     ]
   },
   { path: '/inbox', title: 'Email', icon: 'ft-mail', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

@@ -1,0 +1,36 @@
+<div style="padding: 20px; font-family: Arial, sans-serif;">
+  <h1 style="text-align: center; color: #333;">All Reservations</h1>
+
+  <div style="margin-bottom: 20px;">
+    <label for="spaceSelect" style="font-weight: bold; color: #555;">Select Space:</label>
+    <select id="spaceSelect" (change)="onSpaceChange($event.target.value)" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 200px; margin-left: 10px;">
+      <option value="">--Select a Space--</option>
+      <option *ngFor="let space of spaces" [value]="space.id">{{space.name}}</option>
+    </select>
+  </div>
+
+  <table style="width: 100%; border-collapse: collapse; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);">
+    <thead>
+      <tr style="background-color: #f2f2f2;">
+        <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">ID</th>
+        <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">User ID</th>
+        <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Start Date</th>
+        <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">End Date</th>
+        <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reservation of reservations" style="background-color: #fff;">
+        <td style="border: 1px solid #ddd; padding: 12px;">{{ reservation.id }}</td>
+        <td style="border: 1px solid #ddd; padding: 12px;">{{ reservation.userId }}</td>
+        <td style="border: 1px solid #ddd; padding: 12px;">{{ reservation.startDate }}</td>
+        <td style="border: 1px solid #ddd; padding: 12px;">{{ reservation.endDate }}</td>
+        <td style="border: 1px solid #ddd; padding: 12px;">
+          <button (click)="deleteReservation(reservation.id)" style="background-color: #e74c3c; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
