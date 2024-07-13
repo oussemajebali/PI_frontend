@@ -42,6 +42,10 @@ export class EventListComponent implements OnInit {
     );
   }
 
+  getStarsArray(stars: number): number[] {
+    return Array(5).fill(0).map((x, i) => i + 1);
+  }
+
   participate(event: any) {
     const userName = this.userService.getCurrentUserName();
     if (!userName) {
@@ -76,5 +80,4 @@ export class EventListComponent implements OnInit {
       }
     );
   }
-
 }

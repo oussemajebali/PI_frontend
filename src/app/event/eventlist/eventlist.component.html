@@ -27,11 +27,13 @@
           <p class="card-text">End Time: {{ event.endTime }}</p>
           <p class="card-text">Location: {{ event.location }}</p>
           <p class="card-text">Max Attendees: {{ event.maxAttendees }}</p>
-         <!-- Rating Input -->
-  <div class="rating">
-    <span *ngFor="let star of [5, 4, 3, 2, 1]" (click)="rateEvent(event, star)">
-      <i class="fa fa-star" [class.filled]="event.userRating >= star"></i>
-    </span>
+          <div class="card-text">
+            <span *ngFor="let rating of event.ratings">
+              <ng-container *ngFor="let star of getStarsArray(rating.stars)">
+                <i class="fa fa-star" [class.filled]="star <= rating.stars"></i>
+              </ng-container>
+            </span>
+          </div>
         </div>
       </div>
     </div>

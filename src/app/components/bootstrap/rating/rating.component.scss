@@ -1,6 +1,14 @@
 :host ::ng-deep ngb-rating span {
     font-size: 1.5rem;
 }
+.fa-star {
+  color: #ddd; /* Default color for empty stars */
+}
+
+.fa-star.filled {
+  color: #ffc107; /* Color for filled stars */
+}
+
 // For Star
 :host ::ng-deep .star {
   font-size: 1.5rem;

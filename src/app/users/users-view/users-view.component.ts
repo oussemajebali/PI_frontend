@@ -88,12 +88,15 @@ export class UsersViewComponent implements OnInit {
       response => {
         this.spinner.hide();
         console.log('User created successfully', response);
+        alert('User created successfully');
+        this.userForm.reset();
         // Navigate to another page or display a success message
       },
       error => {
         this.spinner.hide();
         this.isCreateFailed = true;
         console.error('Error creating user', error);
+        alert('Error creating user');
         // Log the error details for debugging
         if (error instanceof HttpErrorResponse) {
           console.error(`Status: ${error.status}, ${error.statusText}`);
