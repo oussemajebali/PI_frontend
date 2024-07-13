@@ -30,7 +30,9 @@ import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 import { AuthService } from "./shared/auth/auth.service";
 import { AuthGuard } from "./shared/auth/auth-guard.service";
 import { WINDOW_PROVIDERS } from './shared/services/window.service';
-
+import { ProductComponent } from './emarket/product.component';
+import { ProductListComponent } from './emarket/product-list.component';
+import { ProductService } from './emarket/product.service';
 var firebaseConfig = {
   apiKey: "AIzaSyC9XfnIpwNoSv7cyAsoccFQ5EYPd7lZXrk", //YOUR_API_KEY
   authDomain: "apex-angular.firebaseapp.com", //YOUR_AUTH_DOMAIN
@@ -53,7 +55,8 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, FullLayoutComponent, ContentLayoutComponent],
+  declarations: [AppComponent, FullLayoutComponent, ContentLayoutComponent,ProductComponent,
+    ProductListComponent],
   imports: [
     BrowserAnimationsModule,
     StoreModule.forRoot(fromApp.appReducer),
@@ -78,6 +81,7 @@ export function createTranslateLoader(http: HttpClient) {
     PerfectScrollbarModule
   ],
   providers: [
+    ProductService,
     AuthService,
     // {
     //   provide: HTTP_INTERCEPTORS,

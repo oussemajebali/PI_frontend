@@ -29,6 +29,8 @@ export class AppComponent implements OnInit, OnDestroy {
         }
     }
 
-
+    redirectToLogin() {
+        this.router.navigate(['/pages/login']);
+    }
 
 }

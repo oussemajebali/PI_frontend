@@ -8,15 +8,32 @@ import { Full_ROUTES } from "./shared/routes/full-layout.routes";
 import { CONTENT_ROUTES } from "./shared/routes/content-layout.routes";
 
 import { AuthGuard } from './shared/auth/auth-guard.service';
+import { ProductListComponent } from './emarket/product-list.component'; // Import the ProductListComponent
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'pages/login',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
-  { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
-  { path: '', component: ContentLayoutComponent, data: { title: 'content Views' }, children: CONTENT_ROUTES },
+  {
+    path: 'home',
+    component: ProductListComponent,
+    data: { title: 'Home' }
+  },
+  {
+    path: '',
+    component: FullLayoutComponent,
+    data: { title: 'full Views' },
+    children: Full_ROUTES,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '',
+    component: ContentLayoutComponent,
+    data: { title: 'content Views' },
+    children: CONTENT_ROUTES
+  },
   {
     path: '**',
     redirectTo: 'pages/error'
@@ -27,6 +44,4 @@ const appRoutes: Routes = [
   imports: [RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules, relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
-
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

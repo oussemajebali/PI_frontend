@@ -1,0 +1,73 @@
+[
+    {
+      "id": 1,
+      "name": "Club T-shirt",
+      "description": "High-quality club t-shirt made of 100% cotton.",
+      "price": 20,
+      "imageUrl": "https://res.cloudinary.com/dbzbns1wk/image/upload/v1720829179/gmwmvhlgepytvifdfs1l.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Club Mug",
+      "description": "Ceramic mug with club logo, perfect for coffee or tea.",
+      "price": 10,
+      "imageUrl": "https://example.com/images/mug1.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Club Notebook",
+      "description": "Spiral-bound notebook with club logo, 120 pages.",
+      "price": 8,
+      "imageUrl": "https://example.com/images/notebook1.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Club Pencil Set",
+      "description": "Set of 5 high-quality pencils with club logo.",
+      "price": 5,
+      "imageUrl": "https://example.com/images/pencil1.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Club Water Bottle",
+      "description": "Stainless steel water bottle with club logo.",
+      "price": 15,
+      "imageUrl": "https://example.com/images/waterbottle1.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Club Hoodie",
+      "description": "Comfortable hoodie with club logo, available in various sizes.",
+      "price": 30,
+      "imageUrl": "https://example.com/images/hoodie1.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Club Cap",
+      "description": "Adjustable cap with embroidered club logo.",
+      "price": 12,
+      "imageUrl": "https://example.com/images/cap1.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Club Bag",
+      "description": "Durable tote bag with club logo.",
+      "price": 18,
+      "imageUrl": "https://example.com/images/bag1.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Club Keychain",
+      "description": "Metal keychain with club logo.",
+      "price": 4,
+      "imageUrl": "https://example.com/images/keychain1.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Club Sticker Pack",
+      "description": "Pack of 10 stickers with various club logos.",
+      "price": 6,
+      "imageUrl": "https://example.com/images/stickers1.jpg"
+    }
+  ]
+  
