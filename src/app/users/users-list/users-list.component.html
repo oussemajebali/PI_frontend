@@ -24,9 +24,9 @@
               </label>
             </fieldset>
             <ngx-datatable class="bootstrap core-bootstrap" [columnMode]="ColumnMode.force" [headerHeight]="50"
-            [footerHeight]="50" rowHeight="auto" [limit]="limitRef" [rows]="rows" [scrollbarH]="true" [columns]="columns">
+            [footerHeight]="50" rowHeight="auto" [limit]="limitRef" [rows]="rows" [columns]="columns">
             <ngx-datatable-column name="ID" prop="userId" [width]="50"></ngx-datatable-column>
-            <ngx-datatable-column name="Email" prop="email" [width]="150">
+            <ngx-datatable-column name="Email" prop="email" [width]="180">
               <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
                 <div class="d-flex align-items-center">
                   <img class="rounded-circle mr-1" [src]="row.avatar" height="32" width="32" alt="datatable-avatar" />
@@ -59,9 +59,6 @@
               </ng-template>
             </ngx-datatable-column>
           </ngx-datatable>
-          
-          
-          
           
             <!-- ngx-datatable-filter -->
           </div>
