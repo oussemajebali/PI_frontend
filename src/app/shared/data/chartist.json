@@ -847,7 +847,7 @@
       ]
     ]
   },
-
+  
   "EventGrowthRate": {
     "labels": [
       "1",
@@ -882,7 +882,30 @@
       ]
     ]
   },
-
+  "EventParticipationRatePie": {
+    "series": [
+      {
+        "name": "done",
+        "className": "ct-done",
+        "value": 90
+      },
+      {
+        "name": "progress",
+        "className": "ct-progress",
+        "value": 14
+      },
+      {
+        "name": "outstanding",
+        "className": "ct-outstanding",
+        "value": 35
+      },
+      {
+        "name": "started",
+        "className": "ct-started",
+        "value": 28
+      }
+    ]
+  },
   "EventParticipationRate": {
     "labels": [
       "1",

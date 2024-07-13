@@ -98,79 +98,16 @@
   <div class="col-xl-4 col-lg-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title mb-0">Discover People</h4>
+        <h4 class="card-title mb-0">Event Participation Rate</h4>
       </div>
       <div class="card-content">
         <div class="card-body">
-          <div class="media pt-0 pb-2">
-            <img class="mr-3 avatar rounded" src="assets/img/portrait/small/avatar-s-20.png" alt="Avatar" width="35">
-            <div class="media-body">
-              <h4 class="font-medium-1 mb-0">Jessica Rice</h4>
-              <p class="grey font-small-3 m-0">UX Designer</p>
-            </div>
-            <button type="button" class="btn btn-primary">
-              <i class="ft-user-plus"></i>
-            </button>
-          </div>
-          <div class="media py-2">
-            <img class="mr-3 avatar rounded" src="assets/img/portrait/small/avatar-s-15.png" alt="Avatar" width="35">
-            <div class="media-body">
-              <h4 class="font-medium-1 mb-0">Jacob Rios</h4>
-              <p class="grey font-small-3 m-0">HTML Developer</p>
-            </div>
-            <button type="button" class="btn bg-light-primary">
-              <i class="ft-user-check"></i>
-            </button>
-          </div>
-          <div class="media py-2">
-            <img class="mr-3 avatar rounded" src="assets/img/portrait/small/avatar-s-7.png" alt="Avatar" width="35">
-            <div class="media-body">
-              <h4 class="font-medium-1 mb-0">Russell Delgado</h4>
-              <p class="grey font-small-3 m-0">Database Designer</p>
-            </div>
-            <button type="button" class="btn btn-primary">
-              <i class="ft-user-plus"></i>
-            </button>
-          </div>
-          <div class="media py-2">
-            <img class="mr-3 avatar rounded" src="assets/img/portrait/small/avatar-s-6.png" alt="Avatar" width="35">
-            <div class="media-body">
-              <h4 class="font-medium-1 mb-0">Sara McDonald</h4>
-              <p class="grey font-small-3 m-0">Team Leader</p>
-            </div>
-            <button type="button" class="btn bg-light-primary">
-              <i class="ft-user-check"></i>
-            </button>
-          </div>
-          <div class="media py-2">
-            <img class="mr-3 avatar rounded" src="assets/img/portrait/small/avatar-s-16.png" alt="Avatar" width="35">
-            <div class="media-body">
-              <h4 class="font-medium-1 mb-0">Janet Lucas</h4>
-              <p class="grey font-small-3 m-0">Project Manager</p>
-            </div>
-            <button type="button" class="btn bg-light-primary">
-              <i class="ft-user-check"></i>
-            </button>
-          </div>
-          <div class="media py-2">
-            <img class="mr-3 avatar rounded" src="assets/img/portrait/small/avatar-s-25.png" alt="Avatar" width="35">
-            <div class="media-body">
-              <h4 class="font-medium-1 mb-0">Mark Carter</h4>
-              <p class="grey font-small-3 m-0">HTML Developer</p>
-            </div>
-            <button type="button" class="btn btn-primary">
-              <i class="ft-user-plus"></i>
-            </button>
-          </div>
-          <div class="media pt-2 pb-1">
-            <img class="mr-3 avatar rounded" src="assets/img/portrait/small/avatar-s-5.png" alt="Avatar" width="35">
-            <div class="media-body">
-              <h4 class="font-medium-1 mb-0">Chad Reese</h4>
-              <p class="grey font-small-3 m-0">UI Designer</p>
-            </div>
-            <button type="button" class="btn btn-primary">
-              <i class="ft-user-plus"></i>
-            </button>
+          <div id="donut-dashboard-chart" class="donut">
+            <x-chartist class="height-250" [data]="EventParticipationRatePie.data"
+             [type]="EventParticipationRatePie.type" [options]="EventParticipationRatePie.options"
+             [responsiveOptions]="EventParticipationRatePie.responsiveOptions"
+             [events]="EventParticipationRatePie.events">
+            </x-chartist>
           </div>
         </div>
       </div>
