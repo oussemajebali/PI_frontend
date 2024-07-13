@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from '../event.service';
 import { ParticipationService } from '../participation.service';
 import { UserService } from '../../users/user.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-event-list',
@@ -14,7 +15,8 @@ export class EventListComponent implements OnInit {
   constructor(
     private eventService: EventService,
     private participationService: ParticipationService,
-    private userService: UserService
+    private userService: UserService,
+    private modal: NgbModal
   ) {}
 
   ngOnInit() {
@@ -32,11 +34,7 @@ export class EventListComponent implements OnInit {
             event.images = [];
           }
           return event;
-        }).sort((a, b) => {
-          return new Date(b.startTime).getTime() - new Date(a.startTime).getTime();
-        });
-
-        console.log('Events fetched successfully', this.events);
+        }).sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime());
       },
       error => {
         console.error('Error fetching events:', error);
@@ -51,6 +49,7 @@ export class EventListComponent implements OnInit {
       return;
     }
 
+    // Check if max attendees limit is reached
     if (event.participations.length >= event.maxAttendees) {
       alert('Sorry, the maximum number of attendees for this event has been reached.');
       return;
@@ -59,14 +58,15 @@ export class EventListComponent implements OnInit {
     const participationData = {
       userName: userName,
       participationTime: new Date().toISOString(),
-      event: { id: event.id }
+      event: { id: event.id } // Send only the event ID
     };
 
     this.participationService.createParticipation(participationData).subscribe(
       (response) => {
         console.log('Participation created successfully:', response);
         const updatedEvent = { ...event };
-        updatedEvent.participations.push(response);
+        updatedEvent.maxAttendees--; // Decrease maxAttendees locally
+        updatedEvent.participations.push(response); // Assuming response contains the created participation object
         this.events = this.events.map(e => e.id === event.id ? updatedEvent : e);
         alert('You have successfully participated in the event!');
       },
@@ -76,29 +76,5 @@ export class EventListComponent implements OnInit {
       }
     );
   }
-  rateEvent(event: any, stars: number) {
-    const userName = this.userService.getCurrentUserName();
-    if (!userName) {
-      console.error('Current user name not found in local storage.');
-      return;
-    }
-  
-    const ratingData = {
-      user: { id: '1'  },
-      event: { id: event.id },
-      stars: stars
-    };
-  
-    this.eventService.createRating(ratingData).subscribe(
-      (response) => {
-        console.log('Rating created successfully:', response);
-        alert('You have successfully rated the event!');
-      },
-      (error) => {
-        console.error('Error rating event:', error);
-        alert('Failed to rate the event. Please try again.');
-      }
-    );
-  }
-  
+
 }

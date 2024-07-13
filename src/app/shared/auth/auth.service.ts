@@ -9,7 +9,11 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+  getCurrentUserName(): string {
+    return localStorage.getItem('role');
+  }
   private baseUrl = environment.BASE_URL + '/auth';
+  
 
   constructor(private http: HttpClient, private router: Router) { }
 
