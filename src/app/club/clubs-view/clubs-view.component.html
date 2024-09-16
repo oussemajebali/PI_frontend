@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Create a New Club</h2>
+  <form (ngSubmit)="createClub()">
+    <div class="form-group">
+      <label for="name">Club Name</label>
+      <input type="text" id="name" [(ngModel)]="club.name" name="name" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Club Description</label>
+      <textarea id="description" [(ngModel)]="club.description" name="description" class="form-control" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="leader">Club Leader ID</label>
+      <input type="number" id="leader" [(ngModel)]="club.leader" name="leader" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Club</button>
+  </form>
+</div>

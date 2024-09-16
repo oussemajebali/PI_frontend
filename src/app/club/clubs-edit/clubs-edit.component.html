@@ -1,0 +1,39 @@
+<section class="clubs-edit">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <!-- Club Info form starts -->
+            <form *ngIf="clubForm" [formGroup]="clubForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <label for="name">Club Name</label>
+                    <input type="text" id="name" formControlName="name" class="form-control" placeholder="Club Name" required>
+                    <div *ngIf="clubForm.get('name').invalid && clubForm.get('name').touched" class="text-danger">
+                      Club name is required.
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" formControlName="description" class="form-control" placeholder="Description" required></textarea>
+                    <div *ngIf="clubForm.get('description').invalid && clubForm.get('description').touched" class="text-danger">
+                      Description is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-3 mt-sm-2">
+                  <button type="submit" class="btn btn-primary mb-2 mb-sm-0 mr-sm-2">Save Changes</button>
+                  <button type="button" class="btn btn-secondary" (click)="router.navigate(['/clubs/list'])">Cancel</button>
+                </div>
+              </div>
+            </form>
+            <!-- Club Info form ends -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

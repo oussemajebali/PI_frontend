@@ -15,9 +15,14 @@ export const Full_ROUTES: Routes = [
     path: 'events',
     loadChildren: () => import('../../event/event.module').then(m => m.EventsModule)
   },
+  
   {
     path: 'calendar',
     loadChildren: () => import('../../calendar/calendar.module').then(m => m.CalendarsModule)
+  },
+  {
+    path: 'clubs',
+    loadChildren: () => import('../../club/clubs.module').then(m => m.ClubsModule)
   },
   {
     path: 'charts',
