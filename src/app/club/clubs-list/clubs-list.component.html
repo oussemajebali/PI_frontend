@@ -135,12 +135,12 @@
             <section id="join-requests">
               <div *ngIf="joinRequests.length > 0">
                 <h2>Club Join Requests</h2>
-                <div *ngFor="let request of joinRequests">
-                  <p><strong>Name:</strong> {{ request.name }}</p>
-                  <p><strong>Position:</strong> {{ request.position }}</p>
-                  <p><strong>Reason:</strong> {{ request.reason }}</p>
-                  <button (click)="approveRequest(request.id)">Approve</button>
-                  <button (click)="rejectRequest(request.id)">Reject</button>
+                <div *ngFor="let membership of joinRequests">
+                  <p><strong>Name:</strong> {{ membership.name }}</p>
+                  <p><strong>Position:</strong> {{ membership.position }}</p>
+                  <p><strong>Reason:</strong> {{ membership.reason }}</p>
+                  <button (click)="approveRequest(membership)">Approve</button>
+                  <button (click)="rejectRequest(membership)">Reject</button>
                   <hr />
                 </div>
               </div>

@@ -35,26 +35,32 @@ export class ProductListComponent implements OnInit {
 
   onJoinClub(club: any, event: Event) {
     event.preventDefault(); // Prevent the default form submission behavior
+
+    // Get existing requests from localStorage or initialize an empty array
+    const existingRequests = JSON.parse(localStorage.getItem('clubJoinRequests') || '[]');
     
+      // Check if there are existing requests, and calculate the new ID
+  const newId = existingRequests.length > 0 
+  ? Math.max(...existingRequests.map((request: any) => request.id || 0)) + 1 
+  : 1; // If no existing requests, start with ID 1
+
+    // Create the new join data with the auto-incremented ID
     const joinData = {
+      id: newId, // Add the auto-incremented ID
       name: this.joinForm.name,
       position: this.joinForm.position,
       reason: this.joinForm.reason,
       clubId: club.id // Include the club ID to associate the join request with a specific club
     };
-  
-    // Get existing requests from localStorage or initialize an empty array
-    const existingRequests = JSON.parse(localStorage.getItem('clubJoinRequests') || '[]');
-  
+
     // Add the new request to the array
     existingRequests.push(joinData);
-  
+
     // Save the updated array back to localStorage
     localStorage.setItem('clubJoinRequests', JSON.stringify(existingRequests));
-  
+
     // Optionally, reset the form and display a success message
     this.joinForm = { name: '', position: '', reason: '' };
     alert('Your request has been saved. The club leader will review.');
   }
-    
 }

@@ -23,12 +23,16 @@ approveClub(id: number): Observable<any> {
 rejectClub(id: number): Observable<any> {
   return this.http.put<any>(`${this.baseUrl}/reject/${id}`, {});
 }
-approveJoinRequest(id: number): Observable<any> {
-  return this.http.put(`${this.membershipUrl}/approve/${id}`, {});
+ // Approve join request with a POST
+ approveJoinRequest(membership: any): Observable<any> {
+  membership.status = 'APPROVED';  // Set status to APPROVED
+  return this.http.post<any>(`${this.membershipUrl}/process`, membership);
 }
 
-rejectJoinRequest(id: number): Observable<any> {
-  return this.http.put(`${this.membershipUrl}/reject/${id}`, {});
+// Reject join request with a POST
+rejectJoinRequest(membership: any): Observable<any> {
+  membership.status = 'REJECTED';  // Set status to REJECTED
+  return this.http.post<any>(`${this.membershipUrl}/process`, membership);
 }
 
 

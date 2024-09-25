@@ -67,10 +67,11 @@ export class ClubsListComponent implements OnInit {
       }
     );
   }
-  approveRequest(id: number) {
-    this.clubService.approveJoinRequest(id).subscribe(
+  approveRequest(membership: any) {
+    this.clubService.approveJoinRequest(membership).subscribe(
       () => {
-        this.loadJoinRequests(); // Reload join requests
+        this.loadJoinRequests();
+        console.log("approved" , membership); // Reload join requests
       },
       (error) => {
         console.error('Failed to approve request', error);
@@ -78,8 +79,8 @@ export class ClubsListComponent implements OnInit {
     );
   }
   
-  rejectRequest(id: number) {
-    this.clubService.rejectJoinRequest(id).subscribe(
+  rejectRequest(membership: any) {
+    this.clubService.rejectJoinRequest(membership).subscribe(
       () => {
         this.loadJoinRequests(); // Reload join requests
       },
@@ -88,6 +89,7 @@ export class ClubsListComponent implements OnInit {
       }
     );
   }
+  
   
   filterUpdate(event) {
     const val = event.target.value.toLowerCase();
