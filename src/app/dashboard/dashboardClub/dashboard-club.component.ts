@@ -12,8 +12,11 @@ export class DashboardClubComponent implements OnInit {
   totalJoinRequests: number = 0;
   approvedClubs: number = 0;
   rejectedClubs: number = 0;
+  approvedClubsmmbr: number = 0;
+  rejectedClubsmmbr: number = 0;
+  pendingClubs: number = 0;
   pieChart: any;
-  lineChart: any; // Rename this for clarity
+  barChart: any;
 
   constructor(private clubService: ClubService) {}
 
@@ -21,6 +24,7 @@ export class DashboardClubComponent implements OnInit {
     this.getClubsCount();
     this.getJoinRequestsCount();
     this.getClubsApprovalStatus();
+    this.getClubsMmbrApprovalStatus();
   }
 
   getClubsCount(): void {
@@ -39,66 +43,46 @@ export class DashboardClubComponent implements OnInit {
     this.clubService.getAllClubs().subscribe(clubs => {
       this.approvedClubs = clubs.filter(club => club.status === 'APPROVED').length;
       this.rejectedClubs = clubs.filter(club => club.status === 'REJECTED').length;
+      this.pendingClubs = clubs.filter(club => club.status === 'PENDING').length;
       this.createPieChart();
-      this.createLineChart(); // Call to create line chart
+      this.createBarChart(); // Call to create bar chart
     });
   }
-
+  getClubsMmbrApprovalStatus(): void {
+    this.clubService.getAllClubsMemberships().subscribe(clubsmmbr => {
+      this.approvedClubsmmbr = clubsmmbr.filter(clubmmbr => clubmmbr.status === 'APPROVED').length;
+      this.rejectedClubsmmbr = clubsmmbr.filter(clubmmbr => clubmmbr.status === 'REJECTED').length;
+      this.createPieChart();
+      this.createBarChart(); // Call to create bar chart
+    });
+  }
   createPieChart(): void {
     this.pieChart = new Chart('approvalChart', {
       type: 'pie',
       data: {
-        labels: ['Approved', 'Rejected'],
+        labels: ['Approved', 'Rejected',  'Pending'],
+
         datasets: [{
-          data: [this.approvedClubs, this.rejectedClubs],
-          backgroundColor: ['#4caf50', '#f44336'],
+          data: [this.approvedClubs, this.rejectedClubs , this.pendingClubs],
+          backgroundColor: ['#4caf50', '#f44336',"#FDFD96"],
         }]
       }
     });
   }
 
-  createLineChart(): void {
-    this.lineChart = new Chart('joinRequestChart', {
-      type: 'line', // Change the type to 'line'
+  createBarChart(): void {
+    this.barChart = new Chart('joinRequestChart', {
+      type: 'bar',
       data: {
-        labels: ['Approved', 'Rejected'], // Labels for the X-axis
-        datasets: [
-          {
-            label: 'Approved Join Requests',
-            data: [this.approvedClubs, 0], // First point for approved
-            borderColor: '#4caf50', // Green color for approved line
-            backgroundColor: 'rgba(76, 175, 80, 0.2)', // Light green background
-            fill: true, // Fill area under the line
-          },
-          {
-            label: 'Rejected Join Requests',
-            data: [0, this.rejectedClubs], // Second point for rejected
-            borderColor: '#f44336', // Red color for rejected line
-            backgroundColor: 'rgba(244, 67, 54, 0.2)', // Light red background
-            fill: true, // Fill area under the line
-          }
-        ]
+        labels: ['Approved', 'Rejected'],
+        datasets: [{
+          label: 'Join Requests',
+          data: [this.rejectedClubsmmbr, this.rejectedClubsmmbr],
+          backgroundColor: ['#4caf50', '#f44336'],
+        }]
       },
       options: {
-        scales: {
-          // Use 'x' and 'y' for Chart.js v3+
-          x: {
-            type: 'category', // Specify the x-axis type
-            title: {
-              display: true,
-              text: 'Approval Status'
-            }
-          },
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Number of Requests'
-            }
-          }
-        },
-        responsive: true,
-        maintainAspectRatio: false // Allows chart to resize
+       
       }
     });
   }
