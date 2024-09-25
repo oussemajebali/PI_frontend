@@ -1,7 +1,7 @@
 <!-- Filter Datatables -->
 <section id="ngx-datatable-filter">
   <div class="row">
-    <div class="col-6">
+    <div class="col-12">
       <div class="card">
         <div class="card-content">
           <div class="card-body">
@@ -46,6 +46,12 @@
                 prop="id"
                 [width]="50"
               ></ngx-datatable-column>
+              <ngx-datatable-column name="Logo" [width]="100">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <img *ngIf="row.logoUrl" [src]="row.logoUrl" alt="{{ row.name }} Logo" height="50" />
+                  <span *ngIf="!row.logoUrl">No Logo</span>
+                </ng-template>
+              </ngx-datatable-column>
               <ngx-datatable-column
                 name="Name"
                 prop="name"
@@ -128,32 +134,6 @@
         </div>
       </div>
     </div>
-    <div class="col-6">
-      <div class="card">
-        <div class="card-content">
-          <div class="card-body">
-            <section id="join-requests">
-              <div *ngIf="joinRequests.length > 0">
-                <h2>Club Join Requests</h2>
-                <div *ngFor="let membership of joinRequests">
-                  <p><strong>Name:</strong> {{ membership.name }}</p>
-                  <p><strong>Position:</strong> {{ membership.position }}</p>
-                  <p><strong>Reason:</strong> {{ membership.reason }}</p>
-                  <button (click)="approveRequest(membership)">Approve</button>
-                  <button (click)="rejectRequest(membership)">Reject</button>
-                  <hr />
-                </div>
-              </div>
-            
-              <div *ngIf="joinRequests.length === 0">
-                <p>No join requests available.</p>
-              </div>
-            </section>
-            
-          </div>
-          </div>
-        </div>
-      </div>
     </div>
 </section>
 <!--/ Filter Datatables -->

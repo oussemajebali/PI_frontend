@@ -4,6 +4,7 @@ import { AuthGuard } from '../shared/auth/auth-guard.service'; // Import AuthGua
 import { ClubsViewComponent } from "./clubs-view/clubs-view.component";
 import { ClubsListComponent } from "./clubs-list/clubs-list.component";
 import { ClubsEditComponent } from "./clubs-edit/clubs-edit.component";
+import { JoinListComponent } from './join-list-clubs/join-list.component';
 
 const routes: Routes = [
     {
@@ -17,6 +18,11 @@ const routes: Routes = [
             {
                 path: 'list',
                 component: ClubsListComponent,
+                canActivate: [AuthGuard] // Use AuthGuard here
+            },
+            {
+                path: 'join',
+                component: JoinListComponent,
                 canActivate: [AuthGuard] // Use AuthGuard here
             },
             {

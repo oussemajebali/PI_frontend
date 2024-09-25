@@ -1,0 +1,25 @@
+<div class="dashboard-club">
+  <h2>Club Dashboard</h2>
+  
+  <div class="card-container">
+    <div class="card">
+      <h4>Total Clubs Created:</h4>
+      <p class="card-number">{{ totalClubs }}</p>
+    </div>
+    
+    <div class="card">
+      <h4>Total Join Requests:</h4>
+      <p class="card-number">{{ totalJoinRequests }}</p>
+    </div>
+  </div>
+
+  <div>
+    <h4>Approval Club Status:</h4>
+    <canvas id="approvalChart"></canvas>
+  </div>
+
+  <div>
+    <h4>Join Request Approval/Rejection:</h4>
+    <canvas id="joinRequestChart" style="height: 400px; width: 100%;"></canvas>
+  </div>
+</div>

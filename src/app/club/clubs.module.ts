@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ClubService } from './clubs.service';
 import { ConfirmationModalComponent } from './clubs-list/confirmation-modal.component';
+import { JoinListComponent } from './join-list-clubs/join-list.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -29,6 +30,7 @@ import { ConfirmationModalComponent } from './clubs-list/confirmation-modal.comp
         HttpClientModule
     ],
     declarations: [
+        JoinListComponent,
         ConfirmationModalComponent,  // Declare the modal component
         ClubsListComponent,
         ClubsViewComponent,

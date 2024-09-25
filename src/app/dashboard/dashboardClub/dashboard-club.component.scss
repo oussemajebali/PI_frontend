@@ -1,0 +1,58 @@
+.dashboard-club {
+  h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .card-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; // Space between cards
+    margin-bottom: 20px;
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      flex: 1; // Allow cards to grow equally
+
+      h4 {
+        margin: 0;
+        color: #555;
+      }
+
+      .card-number {
+        font-size: 2rem; // Larger font for numbers
+        font-weight: bold;
+        color: #4caf50; // Green color for positive stats
+      }
+
+      // Hover effect
+      &:hover {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        transition: box-shadow 0.3s ease;
+      }
+    }
+  }
+
+  .charts-container {
+    display: flex;
+    justify-content: space-around; // Distribute space evenly
+    margin-top: 20px;
+
+    .chart {
+      width: 45%; // Each chart takes up nearly half of the container
+      h4 {
+        text-align: center;
+      }
+      canvas {
+        width: 100% !important; // Make canvas fill the chart container
+        height: auto !important; // Keep aspect ratio
+      }
+    }
+  }
+}

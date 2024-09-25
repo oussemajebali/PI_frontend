@@ -4,16 +4,15 @@ import { ClubService } from '../clubs.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../shared/auth/auth.service';
-import { ConfirmationModalComponent } from './confirmation-modal.component'; // Import the confirmation modal
-import { DeleteModalContentComponent } from 'app/users/users-list/users-list.component';
+import { ConfirmationModalComponent } from './confirmation-modal.component';
 
 @Component({
   selector: 'app-clubs-list',
-  templateUrl: './clubs-list.component.html',
-  styleUrls: ['./clubs-list.component.scss', '../../../assets/sass/libs/datatables.scss'],
+  templateUrl: './join-list.component.html',
+  styleUrls: ['./join-list.component.scss', '../../../assets/sass/libs/datatables.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ClubsListComponent implements OnInit {
+export class JoinListComponent implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
 
   public rows = [];
@@ -21,16 +20,18 @@ export class ClubsListComponent implements OnInit {
   public limitRef = 10;
   tempData: any[] = [];
   isAdmin: boolean = false;
+  joinRequests: any;
 
   public columns = [
+    { name: 'Club ID', prop: 'clubId' },  // Add this line
     { name: 'ID', prop: 'id' },
     { name: 'Name', prop: 'name' },
-    { name: 'Leader', prop: 'leader' },
-    { name: 'Description', prop: 'description' },
+    { name: 'Position', prop: 'position' },
+    { name: 'Reason', prop: 'reason' },
     { name: 'Status', prop: 'status' },
     { name: 'Actions', prop: 'actions' }
   ];
-  joinRequests: any;
+  
 
   constructor(
     private clubService: ClubService,
@@ -42,56 +43,87 @@ export class ClubsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAdmin = this.authService.getCurrentUserName() === 'UNIVERSITY_ADMIN'; // Check if admin
-    this.loadClubs();
     this.loadJoinRequests(); // Load stored join requests
+    this.loadClubs();
+    this.loadClubsmm(); // Load memberships (approved/rejected)
     this.cdRef.detectChanges();
   }
-  
+
   loadJoinRequests() {
-    // Fetch join requests from local storage
     const requests = localStorage.getItem('clubJoinRequests');
     if (requests) {
       this.joinRequests = JSON.parse(requests);
     }
   }
-  
 
   loadClubs() {
     this.clubService.getAllClubs().subscribe(
       (clubs) => {
         this.rows = clubs.sort((a, b) => a.id - b.id);
         this.tempData = [...this.rows];
-        console.log(clubs);
       },
       (error) => {
         console.error('Failed to fetch clubs', error);
       }
     );
   }
-  approveRequest(membership: any) {
-    this.clubService.approveJoinRequest(membership).subscribe(
-      () => {
-        this.loadJoinRequests();
-        console.log("approved" , membership); // Reload join requests
+
+  loadClubsmm() {
+    this.clubService.getAllClubsMemberships().subscribe(
+      (memberships) => {
+        this.rows = memberships.sort((a, b) => a.id - b.id);
+        this.tempData = [...this.rows];
       },
       (error) => {
-        console.error('Failed to approve request', error);
+        console.error('Failed to fetch club memberships', error);
       }
     );
   }
-  
-  rejectRequest(membership: any) {
-    this.clubService.rejectJoinRequest(membership).subscribe(
+
+  approveRequest(request: any) {
+    this.openConfirmationModal(
       () => {
-        this.loadJoinRequests(); // Reload join requests
+        this.clubService.approveJoinRequest(request).subscribe(
+          () => {
+            this.updateRequestStatus(request, 'APPROVED');
+          },
+          (error) => {
+            console.error('Failed to approve request', error);
+          }
+        );
       },
-      (error) => {
-        console.error('Failed to reject request', error);
-      }
+      'Confirm Approval',
+      `Do you want to approve the join request for ${request.name}?`
     );
   }
-  
-  
+
+  rejectRequest(request: any) {
+    this.openConfirmationModal(
+      () => {
+        this.clubService.rejectJoinRequest(request).subscribe(
+          () => {
+            this.updateRequestStatus(request, 'REJECTED');
+          },
+          (error) => {
+            console.error('Failed to reject request', error);
+          }
+        );
+      },
+      'Confirm Rejection',
+      `Do you want to reject the join request for ${request.name}?`
+    );
+  }
+
+  updateRequestStatus(request: any, status: string) {
+    request.status = status;
+    this.saveJoinRequestsToLocalStorage();
+    this.loadClubsmm();
+  }
+
+  saveJoinRequestsToLocalStorage() {
+    localStorage.setItem('clubJoinRequests', JSON.stringify(this.joinRequests));
+  }
+
   filterUpdate(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.tempData.filter(d => {
@@ -111,30 +143,6 @@ export class ClubsListComponent implements OnInit {
     this.limitRef = limit.target.value;
   }
 
-  editClub(club) {
-    if (club != null) {
-      this.router.navigate(['/clubs/edit', club.id], { state: { club } });
-    }
-  }
-
-  deleteClub(id: number) {
-    const modalRef = this.modalService.open(DeleteModalContentComponent);
-    modalRef.componentInstance.clubId = id;
-
-    modalRef.result.then((result) => {
-      if (result === 'Confirm delete') {
-        this.clubService.deleteClub(id).subscribe(
-          () => {
-            this.loadClubs();
-          },
-          (error) => {
-            console.error('Failed to delete club', error);
-          }
-        );
-      }
-    });
-  }
-
   openConfirmationModal(action: () => void, title: string, message: string) {
     const modalRef = this.modalService.open(ConfirmationModalComponent);
     modalRef.componentInstance.title = title;
@@ -148,27 +156,5 @@ export class ClubsListComponent implements OnInit {
         }
       }
     });
-  }
-
-  approveClub(id: number) {
-    this.openConfirmationModal(
-      () => this.clubService.approveClub(id).subscribe(
-        () => this.loadClubs(),
-        (error) => console.error('Failed to approve club', error)
-      ),
-      'Confirm Approval',
-      'Do you want to approve this club creation request?'
-    );
-  }
-
-  rejectClub(id: number) {
-    this.openConfirmationModal(
-      () => this.clubService.rejectClub(id).subscribe(
-        () => this.loadClubs(),
-        (error) => console.error('Failed to reject club', error)
-      ),
-      'Confirm Rejection',
-      'Do you want to reject this club creation request?'
-    );
   }
 }

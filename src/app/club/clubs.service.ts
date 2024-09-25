@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
 
@@ -13,7 +13,15 @@ export class ClubService {
   constructor(private http: HttpClient) {}
 
   createClub(club: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl, club);
+    const formData = new FormData();
+    formData.append('name', club.name);
+    formData.append('description', club.description);
+    formData.append('leader', club.leader);
+    if (club.logo) {
+      formData.append('logo', club.logo);
+    }
+
+    return this.http.post<any>(this.baseUrl, formData);
   }
 // Add or modify these methods in ClubService
 approveClub(id: number): Observable<any> {
@@ -43,7 +51,10 @@ requestToJoinClub(joinData: any): Observable<any> {
   getAllClubs(): Observable<any[]> {
     return this.http.get<any[]>(this.baseUrl);
   }
-
+// Get all clubs
+getAllClubsMemberships(): Observable<any[]> {
+  return this.http.get<any[]>(this.membershipUrl);
+}
   // Get a club by ID
   getClubById(id: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/${id}`);
